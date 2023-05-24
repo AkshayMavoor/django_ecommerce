@@ -1,0 +1,32 @@
+version: "3"
+   
+services:
+  db:
+    container_name: postgres-container
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_NAME=my_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  django:
+    container_name: django-container
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    environment:
+      - POSTGRES_NAME=my_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    depends_on:
+    - db
+  adminer:
+    container_name: adminer-container
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080

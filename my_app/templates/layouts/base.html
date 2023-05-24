@@ -1,0 +1,100 @@
+<!--
+=========================================================
+* Soft UI Dashboard - v1.0.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard
+* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://github.com/creativetimofficial/soft-ui-dashboard/blob/master/LICENSE.md)
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="/static/assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="/static/assets/img/favicon.png">
+
+  <title>
+    TEST - {% block title %}{% endblock %}
+  </title>
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <link href="/static/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="/static/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <link href="/static/assets/css/nucleo-svg.css" rel="stylesheet" />
+
+  <link id="pagestyle" href="/static/assets/css/soft-ui-dashboard.css?v=1.0.0" rel="stylesheet" />
+
+  <!-- Specific CSS goes HERE -->
+  {% block stylesheets %}{% endblock stylesheets %}
+
+</head>
+
+<body class="g-sidenav-show bg-gray-100">
+  
+  {% for message in messages %}
+  {% if message.tags == 'success' %}
+
+  <div class="toast-body border-radius-md bg-success position-fixed top-5 end-5  w-25" style="height: 70px; z-index: 999;"
+    id="toast-hide">
+    <p class="p-2" style="color: white;">{{message}}</p>
+  </div>
+
+
+  {% else %}
+  <div class="toast-body border-radius-md bg-danger position-fixed top-5 end-5  w-25" style="height: 70px; z-index: 999;"
+    id="toast-hide">
+    <p class="p-2" style="color: white;">{{message}}</p>
+  </div>
+  {%endif%}
+
+
+  {% endfor %}
+
+  {% include "includes/sidebar.html" %}
+
+  <main class="main-content mt-4 border-radius-lg">
+
+
+    {% include "includes/navigation.html" %}
+
+
+    {% block content %}{% endblock content %}
+
+  </main>
+
+ 
+
+  {% include "includes/scripts.html" %}
+
+  <!-- Specific JS goes HERE -->
+
+  {% block javascripts %}
+<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+
+<script>
+  $(document).ready(function() {
+    $("#toast-hide").delay(2000).fadeOut('slow');
+  })
+  
+</script>
+
+
+{% endblock %}
+
+
+  <!-- Github buttons -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+</body>
+
+</html>

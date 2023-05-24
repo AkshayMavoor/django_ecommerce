@@ -1,0 +1,44 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Dashboard {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+{% load static %}
+
+
+<!-- only for admin -->
+
+{% if request.user.is_superuser %}
+<div class="container-fluid py-4">
+  <h2 class="font-weight-bolder">Dashboard</h2>
+  <h3 class="font-weight-bolder">You are a superuser</h3>
+</div>
+{% endif %}
+
+  
+{% if not request.user.is_superuser %}
+<div class="container-fluid py-4">
+  <h2 class="font-weight-bolder">Dashboard</h2>
+  <h3 class="font-weight-bolder">You are a user</h3>
+</div>
+{% endif %}
+
+
+{% include "includes/footer.html" %}
+
+</div>
+
+{% endblock content %}
+{% block javascripts %}
+<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+
+<script>
+$(document).ready(function() {
+  $("#toast-hide").delay(2000).fadeOut('slow');
+})
+</script>
+
+{% endblock javascripts %}

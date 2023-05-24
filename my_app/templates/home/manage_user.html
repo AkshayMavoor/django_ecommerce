@@ -1,0 +1,88 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}
+  Downline Sale
+{% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+{% endblock %}
+
+{% block content %}
+  {% load static %}
+
+  <div class="container-fluid py-4">
+    <div class="row">
+      <div class="col-12">
+        <div class="card mb-4">
+          <div class="card-header pb-0">
+            <a class="btn bg-gradient-primary my-1 me-1 float-end"  href="{% url 'register' %}" >Add User </a>
+            <h6>Manage User</h6>
+          </div>
+          <div class="card-body px-0 pt-0 pb-2">
+            <div class="table-responsive p-0">
+              <table class="table align-items-center mb-0">
+                <thead>
+                  <tr>
+                    <!--  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Product Name</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Function</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>  -->
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Username</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Name</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Email</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Join Date</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Status</th>
+
+                    <th class="text-secondary opacity-7"></th>
+                  </tr>
+                </thead>
+               
+                <tbody>
+                  {% for user in users %}
+                  <tr>
+                    <td>
+                      <p class="text-xs font-weight-bold mb-0 ps-3">{{user.username}}</p>
+                    </td>
+                    <td>
+                      <h6 class="mb-0 text-sm ps-3">{{user.first_name}}</h6>
+                    </td>
+                    <td>
+                      <p class="text-xs font-weight-bold mb-0 ps-3">{{user.email}}</p>
+                    </td>
+                    <td>
+                      <p class="text-xs font-weight-bold mb-0 ps-3">{{user.date_joined}}</p>
+                    </td>
+                    <td>
+                    <p class="text-xs font-weight-bold mb-0 ps-3">
+
+                      {% for rank in ranks%}
+                      {% if rank.user_id == user  %}
+                      {{rank.rank}}
+                      {% endif %}
+                    {% endfor %}</p>
+                    </td>
+                    <td>
+                      <p class="text-xs font-weight-bold mb-0 ps-3">{{user.sponsor}}</p>
+                    </td>
+                    <td class="text-sm">
+                      {% comment %} <span class="badge badge-sm {%if  user.is_active%}btn-success{%else%}btn-danger{%endif%} ">{%if  user.is_active%}Active{%else%}Inactive{%endif%}</span> {% endcomment %}
+                      {% if user.is_active %}
+                      <a href="{% url 'update_user' user.id %}" class=" btn btn-success">Active</a>
+                      {%else%}
+                      <a href="{% url 'update_user' user.id %}" class="btn btn-danger">Blocked</a>
+                      {% endif %}
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+         
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+   
+  </div>
+{% endblock %}
